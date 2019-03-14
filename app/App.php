@@ -10,22 +10,28 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class App implements RequestHandlerInterface
 {
-private $compteurMiddleware;
 
-public function __construct(){
-
-$this->compteurMiddleware = 0 ;  
-  
-}
+    private $cptMiddleware = 0;
+    private $tabMiddlewares;
+    public function __construct(array $tabMw)
+    {
+        $this->tabMiddlewares=$tabMw;
+    }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        
 
-        //Appel du premier Middleware
-        $trailingSlash = new TrailingSlashMiddleware();
-        return $trailingSlash->process($request,$this);
+        $middleware = $this->tabMiddlewares[$this->cptMiddleware];
         
+        $this->cptMiddleware++;
         
-        return $response ;
+        return $middleware->process($request, $this);
+        // $controller= new HomeController;
+        // $response= $controller->process($request, $this);
+        // $ts = new TrailingSlashMiddleware;
+        // $response = $ts->process($request, $this);
+        
+        // return $response ;
     }
 }
