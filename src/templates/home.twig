@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>Description : {{ products[0]["description"] }}</p>
+
+    {% if title == "Bonjour! " % }
+    
+    <p>Bonjour</p>
+
+    {% elseif title == "Bonsoir! " %}
+
+    <p>Bonsoir</p>
+
+    {% else % }
+
+    <p>Bonne nuit </p>
+
+    {% endif % }
+
+    {% for produitEnCours in products % }
+
+    <p>{{produitEnCours['name']}}</p>
+
+    {% endfor % }
+
+</body>
+</html>
